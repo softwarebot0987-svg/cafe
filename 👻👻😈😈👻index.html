@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Restaurant Pro | Owner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--lime:#b4ee4c;--pink:#f3a39e;--aqua:#6fd0dc;--sand:#e6dcc3;--bg:#f1f1ef;--card:#fff;--ink:#0c0c0c;--mut:#6d6d68;--line:#dcdcd6;--f:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#121212;--card:#1d1d1c;--ink:#f4f4f0;--mut:#9a9a93;--line:#333}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 var(--f)}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer;border:0}:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.app{max-width:1080px;margin:auto;padding:16px 16px 40px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.brand{background:none;color:inherit;padding:0;font-weight:800;font-size:22px;letter-spacing:-.03em;display:flex;align-items:center;gap:8px}.brand i{width:22px;height:22px;border-radius:50%;background:var(--lime);display:block;box-shadow:8px 0 0 -2px var(--pink)}
+.pill{border-radius:999px;padding:9px 16px;background:var(--card);font-weight:600;font-size:13px;border:1px solid var(--line)}
+.dark{background:#0c0c0c;color:#fff;border-color:#0c0c0c}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 14px;position:sticky;top:0;z-index:5;background:var(--bg);scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none;border-radius:999px;padding:11px 20px;background:var(--card);font-weight:600;border:1px solid var(--line);transition:.25s}
+.chips button.on{background:#0c0c0c;color:#fff;border-color:#0c0c0c}
+.view{display:none;min-height:60vh}.view.on{display:block}html{overscroll-behavior-x:none}.app{overflow-x:clip;padding-bottom:120px}
+.rs{display:grid}.rc{border-radius:30px;padding:20px 20px 44px;margin-top:-26px;color:#0c0c0c;box-shadow:0 -6px 0 rgba(255,255,255,.35) inset}.rs .rc:first-child{margin-top:0}.rs .rc:last-child{padding-bottom:20px}
+.lg{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.15);font-size:14px}
+#bnav{position:fixed;left:16px;right:16px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:528px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 84px 1fr 1fr;align-items:center;background:#0c0c0c;border-radius:999px;padding:6px 8px;z-index:8}
+#bnav [data-v]{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;color:rgba(255,255,255,.65);padding:6px 0;font-size:11px;font-weight:600;min-height:52px;border-radius:16px}#bnav [data-v].on{color:var(--lime)}
+#bnav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#bnav .fab{grid-column:3;justify-self:center;position:relative;top:-28px;width:62px;height:62px;margin:-5px 0;border-radius:50%;background:var(--lime);color:#0c0c0c;display:grid;place-items:center;box-shadow:0 0 0 6px var(--bg),0 10px 22px rgba(0,0,0,.28);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+#bnav .fab svg{width:28px;height:28px;stroke-width:2.6}#bnav .fab:active{transform:scale(.9)}
+.qa{display:grid;gap:10px;margin-top:6px}.qa .btn{text-align:left;padding:16px 22px;font-size:16px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:10px 0 20px}
+h1{font-size:clamp(40px,10vw,76px);line-height:.9;letter-spacing:-.05em;font-weight:800;margin:0}
+h2{font-size:26px;letter-spacing:-.04em;font-weight:800;margin:0 0 14px;line-height:1}
+.mut{color:var(--mut);font-size:13px}.grid{display:grid;gap:14px}
+.stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:14px}
+.blk{border-radius:30px;padding:20px;position:relative}.lime{background:var(--lime)}.pink{background:var(--pink)}.aqua{background:var(--aqua)}.sand{background:var(--sand)}
+.lime,.pink,.aqua,.sand{color:#0c0c0c}.white{background:var(--card)}
+.stat small{font-weight:600;font-size:13px}.stat b{display:block;font-size:38px;letter-spacing:-.05em;font-weight:800;margin:8px 0 2px;line-height:1}
+.two{grid-template-columns:1.4fr 1fr;align-items:start}
+.bars{display:flex;align-items:flex-end;gap:7px;height:190px;margin-top:16px}
+.col{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;font-size:10px;font-weight:600}
+.bar{width:100%;max-width:26px;border-radius:999px;background:#fff;min-height:14px;transition:height .8s cubic-bezier(.22,1,.36,1)}.bar.max{background:#0c0c0c}
+.tag{display:inline-block;background:#fff;color:#0c0c0c;border-radius:999px;padding:4px 12px;font-weight:700;font-size:12px}
+.seg{display:flex;height:34px;border-radius:999px;overflow:hidden;margin:14px 0 12px;gap:3px}.seg i{display:block}
+.stack{display:grid}.stack .blk{margin-top:-26px;padding:22px 20px 38px;display:flex;align-items:center;gap:14px;box-shadow:0 -6px 0 rgba(255,255,255,.35) inset}
+.stack .blk:first-child{margin-top:0}.rank{font-size:46px;font-weight:800;letter-spacing:-.06em;line-height:1}
+.stack img,.thumb{width:54px;height:54px;border-radius:50%;object-fit:cover;flex:none;background:#fff}
+.stack b{font-size:19px;letter-spacing:-.03em;display:block;line-height:1.1}.stack .tag{margin-left:auto}
+.row{display:flex;align-items:center;gap:12px;justify-content:space-between}
+.act{background:var(--card);border-radius:24px;padding:14px 16px;margin-bottom:10px}
+.badge{border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700;background:var(--lime);color:#0c0c0c}.badge.r{background:var(--pink)}.badge.w{background:var(--sand)}.badge.a{background:var(--aqua)}
+.sgrid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.item{border-radius:28px;padding:18px;background:var(--card)}.item.low{background:var(--pink);color:#0c0c0c}
+.item h3{margin:0;font-size:21px;letter-spacing:-.04em}.qty{font-size:40px;font-weight:800;letter-spacing:-.05em;line-height:1;margin:14px 0 8px}.qty small{font-size:14px;font-weight:600;letter-spacing:0;margin-left:4px}
+.meter{height:12px;border-radius:99px;background:rgba(0,0,0,.12);overflow:hidden;margin-bottom:14px}.meter i{display:block;height:100%;border-radius:99px;background:#0c0c0c;transition:width .6s}
+.rnd{width:42px;height:42px;border-radius:50%;background:#0c0c0c;color:#fff;font-size:22px;font-weight:700;display:grid;place-items:center}.item:not(.low) .rnd.p{background:var(--lime);color:#0c0c0c}
+.btn{border-radius:999px;padding:12px 22px;background:#0c0c0c;color:#fff;font-weight:700}.btn.l{background:var(--lime);color:#0c0c0c}.btn.o{background:transparent;color:inherit;border:1.5px solid currentColor}
+label{display:block;font-size:12px;font-weight:700;margin:12px 0 5px}
+input,select{width:100%;padding:12px 16px;border-radius:999px;border:0;background:#fff;color:#0c0c0c}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0 12px;align-items:end}
+.menu{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}.menu .item img{width:100%;height:130px;object-fit:cover;border-radius:20px;margin-bottom:10px}.menu p{margin:4px 0 12px;color:var(--mut);font-size:13px}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.filters button{border-radius:999px;padding:8px 16px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:13px}.filters .on{background:var(--aqua);color:#0c0c0c;border-color:var(--aqua)}
+.person{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:26px;padding:12px 14px;margin-bottom:10px;flex-wrap:wrap}.person select{width:auto;padding:9px 14px;background:var(--bg);color:var(--ink);font-weight:600;border:1px solid var(--line)}
+.av{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:18px;color:#0c0c0c;flex:none}
+.person .grow{flex:1;min-width:140px}.person b{font-size:17px;letter-spacing:-.02em}
+.empty{padding:34px;text-align:center;color:var(--mut);background:var(--card);border-radius:26px}
+.modal{position:fixed;inset:0;background:#000a;display:none;place-items:center;z-index:20;padding:16px}.modal.on{display:grid}.mbox{background:var(--sand);color:#0c0c0c;border-radius:32px;padding:24px;width:min(420px,100%);max-height:calc(100vh - 32px);overflow-y:auto}.vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}.pv{width:100%;height:130px;object-fit:cover;border-radius:20px;margin:6px 0 10px;background:#fff;display:block}label.btn{display:inline-block;cursor:pointer;margin:0;text-align:center}
+.row input,.row select{min-width:0;flex:1}.mbox{max-height:90vh;overflow:auto}
+.toast{position:fixed;left:50%;bottom:104px;transform:translate(-50%,30px);background:#0c0c0c;color:#fff;border-radius:999px;padding:12px 22px;font-weight:600;opacity:0;pointer-events:none;transition:.3s;z-index:30}.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:520px){.stats .stat:first-child,.stats .pay{grid-column:1/-1}}
+@media(max-width:760px){.two{grid-template-columns:1fr}.head{flex-direction:column;align-items:flex-start}.stack .tag{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+#gate{display:none;position:fixed;inset:0;z-index:50;background:var(--bg);place-items:center;padding:24px}
+.locked #gate{display:grid}.locked .app,.locked #bnav{display:none}
+.gbox{max-width:420px;width:100%}.gbox .btn{font-size:17px;padding:16px 26px;margin:22px 0 14px}.gbox h1{margin:18px 0 12px}
+#gMsg{min-height:20px;line-height:1.4}
+.sw{flex:none;width:76px;height:44px;border-radius:999px;background:#b9b9b3;position:relative;padding:0;transition:background .25s}
+.sw i{position:absolute;top:5px;left:5px;width:34px;height:34px;border-radius:50%;background:#fff;transition:transform .3s cubic-bezier(.34,1.56,.64,1),background .2s}
+.sw[aria-checked=true]{background:#0c0c0c}.sw[aria-checked=true] i{transform:translateX(32px);background:var(--lime)}
+.chips .adm{background:var(--lime);color:#0c0c0c;border-color:var(--lime)}
+</style></head><body class="locked"><div id="gate"><div class="gbox"><div class="brand"><i></i><span>Restaurant Pro</span></div>
+<div id="gSign"><h1>Sign in.</h1><p class="mut">New here? Just continue with Google. Your account is created automatically the first time.</p><button class="btn l" id="gBtn">Continue with Google</button><p class="mut" id="gMsg">Checking sign-in…</p></div>
+<div id="gWait" hidden><h1 id="wT"></h1><p class="mut" id="wP"></p><button class="btn o" id="wOut">Sign out</button><p class="mut" id="wWho"></p></div>
+</div></div><div class="app">
+<header class="top"><button class="brand" id="brand" aria-label="Edit restaurant name"><i></i><span id="brandName">Restaurant Pro</span></button><button class="pill" id="acct">Sign out</button></header>
+<nav class="chips" id="chips"><button class="adm" data-v="admin" id="admChip" hidden>Admin</button><button class="on" data-v="dash">Overview</button><button data-v="stock">Stock</button><button data-v="recipes">Recipes</button><button data-v="orders">Orders</button><button data-v="menu">Menu</button><button data-v="team">Team</button><button data-v="exp">Expenses</button><button data-v="log">Movements</button></nav>
+
+<section id="admin" class="view">
+<div class="head"><h1>Cafes.</h1><span class="badge a" id="admCount"></span></div>
+<p class="mut">New cafes wait here until you switch them on. Switch a cafe off to block it right away.</p>
+<input id="admSearch" placeholder="Search cafe or email…" style="margin:6px 0 14px;background:var(--card);color:var(--ink)"><div id="admList"></div></section>
+
+<section id="dash" class="view on">
+<div class="head"><h1>Your restaurant,<br>at a glance.</h1><span class="pill">Demo data</span></div>
+<div class="grid stats">
+<div class="blk lime stat"><small>Sales this month</small><b>₹1,84,650</b><small>↑ 12.8%</small></div>
+<div class="blk aqua stat"><small>Orders</small><b>1,248</b><small>↑ 8.4%</small></div>
+<div class="blk pink stat"><small>Avg. order</small><b>₹148</b><small>↑ 3.2%</small></div>
+<div class="blk sand stat"><small>Team on duty</small><b id="duty">8/10</b><small>2 on weekly off</small></div></div>
+<div class="grid two">
+<div class="blk lime"><div class="row"><h2>Seasonal<br>statistics</h2><div><span class="tag">highest 185k</span></div></div><div class="bars" id="bars"></div></div>
+<div class="grid"><div class="blk white"><h2>Sales by category</h2><div class="seg"><i style="flex:50;background:var(--lime)"></i><i style="flex:30;background:var(--aqua)"></i><i style="flex:20;background:var(--pink)"></i></div><div class="mut">Food 50% · Beverages 30% · Desserts 20%</div></div>
+<div class="blk sand" id="today"></div><div class="blk pink"><h2>Running low</h2><div id="lowList"></div><button class="btn" style="margin-top:12px" data-go="stock">Open stock</button></div></div></div>
+<h2 style="margin:26px 0 14px">Best sellers</h2><div class="stack" id="best"></div>
+</section>
+
+<section id="stock" class="view">
+<div class="head"><h1>Stock<br>room.</h1><div><span class="badge r" id="lowCount"></span> <span class="badge" id="invVal"></span></div></div>
+<div class="blk aqua" style="margin-bottom:16px"><h2>Scan stock bill</h2><p style="margin:0 0 6px">Take or choose 1 to 3 photos of your supplier bill. You review the items first, then stock is refilled and the prices updated.</p><input id="bF" type="file" accept="image/*" multiple aria-label="Bill photos"><button class="btn" id="bScan" style="margin-top:14px">Read bill</button><div id="bOut" style="margin-top:12px"></div></div>
+<div class="blk lime" style="margin-bottom:16px"><h2>Add stock item</h2><div class="form"><div><label for="sN">Item</label><input id="sN" placeholder="e.g. Oat milk"></div><div><label for="sQ">Quantity</label><input id="sQ" type="number" min="0" placeholder="20"></div><div><label for="sU">Unit</label><select id="sU"><option>kg</option><option>L</option><option>pcs</option></select></div><div><label for="sC">Cost ₹/unit</label><input id="sC" type="number" min="0" placeholder="60"></div><div><label for="sM">Alert below</label><input id="sM" type="number" min="1" placeholder="5"></div><div><label>&nbsp;</label><button class="btn" id="sAdd" style="width:100%">Add</button></div></div></div>
+<div class="grid sgrid" id="stockGrid"></div></section>
+
+<section id="recipes" class="view"><div class="head"><h1>Dishes &amp;<br>recipes.</h1><button class="btn l" onclick="recipe()">+ Add dish</button></div><div class="rs" id="recList"></div></section>
+
+<section id="orders" class="view">
+<div class="head"><h1>Orders.</h1><span class="badge a" id="ordCount"></span></div>
+<div class="blk aqua" style="margin-bottom:16px"><h2>New order</h2><div class="form"><div><label for="oI">Item</label><select id="oI"></select></div><div><label for="oQ">Qty</label><input id="oQ" type="number" min="1" value="1"></div><div><label for="oT">Table</label><select id="oT"><option>Table 01</option><option>Table 02</option><option>Table 03</option><option>Table 04</option><option>Takeaway</option></select></div><div><label>&nbsp;</label><button class="btn" id="oAdd" style="width:100%">Add order</button></div></div>
+<div id="oPrev" style="margin-top:6px"></div></div>
+<div class="filters" id="filters"></div><div id="orderList"></div></section>
+
+<section id="menu" class="view">
+<div class="head"><h1>Menu &amp;<br>photos.</h1></div>
+<div class="blk aqua" style="margin-bottom:16px"><h2>Scan menu card</h2><p style="margin:0 0 6px">Add 1 to 3 photos of your menu card. Dishes and prices are added automatically. Items you already have are skipped.</p><input id="mF" type="file" accept="image/*" multiple aria-label="Menu card photos"><button class="btn" id="mScan" style="margin-top:14px">Read menu</button><div id="mOut" style="margin-top:12px"></div></div>
+<div class="blk pink" style="margin-bottom:16px"><h2>Add a dish</h2><div class="form"><div><label for="iN">Name</label><input id="iN" placeholder="Paneer Tikka Sandwich"></div><div><label for="iP">Price ₹</label><input id="iP" type="number" min="1" placeholder="199"></div><div><label for="iC">Category</label><select id="iC"><option>Food</option><option>Beverages</option><option>Desserts</option><option>Sides</option></select></div><div><label for="iD">Description</label><input id="iD" placeholder="Short line"></div></div><label>Photo</label><img id="iPv" class="pv" alt="Selected photo" style="display:none"><label class="btn o" for="pF" onclick="pickP('form')">Choose photo</label><button class="btn" id="iAdd" style="margin-top:14px">Add to menu</button></div>
+<div class="grid menu" id="menuGrid"></div></section>
+
+<section id="log" class="view"><div class="head"><h1>Stock<br>movements.</h1></div><p class="mut">Every change to stock is recorded here.</p><div id="logList"></div></section>
+
+<section id="team" class="view">
+<div class="head"><h1>Join the<br>team.</h1><button class="btn l" id="addStaff">+ Add employee</button></div>
+<div class="grid stats"><div class="blk lime stat"><small>Team members</small><b id="tT">0</b></div><div class="blk aqua stat"><small>Present today</small><b id="tP">0</b></div><div class="blk pink stat"><small>Off / leave</small><b id="tO">0</b></div><div class="blk sand stat pay"><small>Monthly payroll</small><b id="tPay">₹0</b></div></div>
+<input id="sSearch" placeholder="Search employee…" style="margin-bottom:14px;background:var(--card);color:var(--ink)"><div id="staffList"></div>
+<p class="mut">Deactivate only hides a record from the counts. Delete removes the person completely.</p></section>
+
+<section id="exp" class="view">
+<div class="head"><h1>Monthly<br>expenses.</h1></div>
+<div class="row" style="margin:0 0 14px"><button class="rnd" id="xPrev" aria-label="Previous month">‹</button><b id="expMonth" style="font-size:20px"></b><button class="rnd" id="xNext" aria-label="Next month">›</button></div>
+<div class="blk lime" id="expSum" style="margin-bottom:16px"></div>
+<div class="blk pink" style="margin-bottom:16px"><h2>Add expense</h2><div class="form"><div><label for="xN">Name</label><input id="xN" placeholder="Shop rent"></div><div><label for="xA">Amount ₹</label><input id="xA" type="number" min="1" placeholder="25000"></div><div><label for="xC">Type</label><select id="xC"><option>Rent</option><option>Electricity</option><option>Water</option><option>Gas</option><option>Internet</option><option>Maintenance</option><option>Marketing</option><option>Other</option></select></div><div><label for="xR">How often</label><select id="xR"><option value="m">Every month</option><option value="o">This month only</option></select></div></div><button class="btn" id="xAdd" style="margin-top:14px">Add expense</button></div>
+<div id="expList"></div></section>
+</div>
+
+<nav id="bnav" aria-label="Main"><button data-v="dash" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg>Home</button><button data-v="stock"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>Stock</button><button class="fab" id="fab" aria-label="Quick actions"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button><button data-v="recipes"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3z"/><path d="M9 8h6M9 12h6"/></svg>Recipes</button><button data-v="orders"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>Orders</button></nav>
+<div id="sheet" class="modal"></div><div id="modal" class="modal"><div class="mbox"><h2 id="mT">Add employee</h2><label for="eN">Name</label><input id="eN" placeholder="Full name"><label for="eR">Role</label><select id="eR"><option>Waiter</option><option>Chef</option><option>Kitchen assistant</option><option>Cashier</option><option>Manager</option></select><label for="eT">Job title</label><input id="eT" placeholder="e.g. Head Chef" maxlength="40"><label for="eP">Monthly pay (₹)</label><input id="eP" type="number" min="0" placeholder="18000"><label for="eS">Shift</label><input id="eS" placeholder="10 AM – 6 PM"><div class="row" style="margin-top:18px;justify-content:flex-start"><button class="btn" id="eSave">Save</button><button class="btn o" id="eCancel">Cancel</button></div></div></div>
+<input id="pF" class="vh" type="file" accept="image/*" aria-label="Dish photo"><div id="toast" class="toast" role="status"></div>
+<script>
+const $=id=>document.getElementById(id),KEY='restpro_owner_v1_'+(()=>{try{return localStorage.getItem('restpro_uid')||''}catch(e){return ''}})(),U='https://images.unsplash.com/';
+const MON=['J','F','M','A','M','J','J','A','S','O','N','D'],SALES=[92,108,115,104,132,148,141,156,163,171,178,185],COL=['var(--lime)','var(--aqua)','var(--pink)','var(--sand)'];
+let st=null;try{st=JSON.parse(localStorage.getItem(KEY)||localStorage.getItem('chef11_owner_v3'))}catch(e){}
+const TP={'Aarav Shah':['Senior Waiter',18000],'Riya Patil':['Waiter',15000],'Kabir More':['Head Chef',42000],'Meera Joshi':['Sous Chef',32000],'Dev Kulkarni':['Kitchen Helper',14000],'Sana Khan':['Cashier',17000],'Ishaan Desai':['Restaurant Manager',45000],'Neha Pawar':['Waiter',15000],'Om Jadhav':['Kitchen Helper',13500],'Anaya Rao':['Waiter',15000]};
+const r3=n=>Math.round(n*1000)/1000,f=n=>+(+n).toFixed(3),inr=n=>'₹'+(+n).toLocaleString('en-IN',{maximumFractionDigits:0}),sk=id=>st.stock.find(s=>s.id==id);
+if(!st){st={items:[{id:1,name:'Classic Veg Burger',price:129,cat:'Food',desc:'Crispy patty, fresh veg, house sauce.',photo:U+'photo-1568901346375-23c9450c58cd?w=500',sold:326,recipe:[{i:3,q:1},{i:8,q:.06}]},{id:2,name:'Margherita Pizza',price:249,cat:'Food',desc:'Tomato, mozzarella, basil.',photo:U+'photo-1513104890138-7c749659a591?w=500',sold:281,recipe:[{i:5,q:1},{i:4,q:.15}]},{id:3,name:'Cold Coffee',price:139,cat:'Beverages',desc:'Chilled signature cold coffee.',photo:U+'photo-1461023058943-07fcbe16d735?w=500',sold:244,recipe:[{i:1,q:.018},{i:2,q:.2},{i:6,q:.02},{i:7,q:1}]}],
+stock:[['Coffee beans',3,'kg',5,900],['Fresh milk',22,'L',10,60],['Burger buns',18,'pcs',40,8],['Mozzarella',9,'kg',4,450],['Pizza dough',35,'pcs',20,12],['Sugar',14,'kg',5,45],['Paper cups',220,'pcs',100,3],['Paneer',2,'kg',3,320]].map((x,i)=>({id:i+1,name:x[0],qty:x[1],unit:x[2],min:x[3],cost:x[4]})),
+orders:[],log:[],staff:[['Aarav Shah','Waiter','9 AM – 5 PM','Present'],['Riya Patil','Waiter','12 PM – 8 PM','Present'],['Kabir More','Chef','10 AM – 6 PM','Present'],['Meera Joshi','Chef','2 PM – 10 PM','Present'],['Dev Kulkarni','Kitchen assistant','10 AM – 6 PM','Present'],['Sana Khan','Cashier','9 AM – 5 PM','Present'],['Ishaan Desai','Manager','11 AM – 7 PM','Present'],['Neha Pawar','Waiter','4 PM – 12 AM','Present'],['Om Jadhav','Kitchen assistant','Weekly off','Off'],['Anaya Rao','Waiter','Leave','Leave']].map((x,i)=>({id:i+1,name:x[0],role:x[1],shift:x[2],att:x[3],active:true}))};
+st.staff.forEach(s=>{if(s.title==null)s.title=(TP[s.name]||[s.role])[0];if(s.pay==null)s.pay=(TP[s.name]||[0,0])[1]});
+st.stock.forEach(s=>st.log.push({t:Date.now(),name:s.name,unit:s.unit,type:'OPENING',d:s.qty,bal:s.qty,note:'Opening stock'}))}
+function lg(s,type,d,note){st.log.unshift({t:Date.now(),name:s.name,unit:s.unit,type,d:r3(d),bal:s.qty,note})}
+const rcost=it=>(it.recipe||[]).reduce((a,r)=>a+(sk(r.i)?r.q*sk(r.i).cost:0),0);
+function sheet(h){$('sheet').innerHTML='<div class="mbox">'+h+'</div>';$('sheet').classList.add('on')}
+function closeS(){$('sheet').classList.remove('on')}
+if(!st.expenses)st.expenses=[];let photo='',editing=null,flt='All',nid=Math.max(100,...[...st.items,...st.stock,...st.staff,...st.expenses].map(x=>+x.id||0))+1;
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st));return true}catch(e){return false}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let tt;function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),2000)}
+const ORDER=['dash','stock','recipes','orders','menu','team','exp','log'],R={dash:rDash,stock:rStock,recipes:rRec,orders:rOrders,menu:rMenu,team:rTeam,exp:rExp,log:rLog},reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;let cur='dash',seq=0;window.regView=(id,fn)=>{if(!ORDER.includes(id))ORDER.unshift(id);R[id]=fn};
+const view=()=>document.querySelector('.view.on');
+function show(v){cur=v;document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on',x.id===v));document.querySelectorAll('#chips button,#bnav [data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===v));R[v]();scrollTo({top:0});const c=document.querySelector('#chips .on');if(c)c.scrollIntoView({inline:'center',block:'nearest',behavior:reduce?'auto':'smooth'})}
+function go(v,o){o=o||{};if(v===cur)return;closeS();const dir=o.dir||(ORDER.indexOf(v)>ORDER.indexOf(cur)?1:-1),el=view(),W=Math.min(innerWidth,600),my=++seq;el.getAnimations().forEach(a=>a.cancel());if(reduce){show(v);return}
+const out=el.animate([{transform:`translateX(${o.fromX||0}px)`,opacity:o.fromO==null?1:o.fromO},{transform:`translateX(${-dir*W*.3}px)`,opacity:0}],{duration:150,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'});
+out.onfinish=()=>{if(my!==seq)return;out.cancel();show(v);document.getElementById(v).animate([{transform:`translateX(${dir*W*.3}px)`,opacity:0},{transform:'none',opacity:1}],{duration:340,easing:'cubic-bezier(.22,1,.36,1)'})}}
+$('bnav').onclick=e=>{const b=e.target.closest('[data-v]');if(b)go(b.dataset.v)};
+let sx,sy,t0,dx=0,axis=null,live=false;
+document.addEventListener('touchstart',e=>{live=false;axis=null;dx=0;if(e.touches.length!==1)return;const t=e.touches[0];if(t.clientX<14||t.clientX>innerWidth-14||e.target.closest('#chips,#bnav,.top,input,textarea,.modal.on'))return;
+for(let n=e.target;n&&n!==document.body;n=n.parentNode){if(n.nodeType!==1)continue;const o=getComputedStyle(n).overflowX;if((o==='auto'||o==='scroll')&&n.scrollWidth>n.clientWidth+2)return}sx=t.clientX;sy=t.clientY;t0=Date.now();live=true},{passive:true});
+document.addEventListener('touchmove',e=>{if(!live)return;const t=e.touches[0],mx=t.clientX-sx,my=t.clientY-sy;
+if(!axis){if(Math.abs(mx)<9&&Math.abs(my)<9)return;axis=Math.abs(mx)>Math.abs(my)*1.4?'x':'y';if(axis==='y'){live=false;return}view().getAnimations().forEach(a=>a.cancel())}
+e.preventDefault();const has=ORDER[ORDER.indexOf(cur)+(mx<0?1:-1)];dx=has?mx:mx*.22;const el=view();el.style.transform=`translateX(${dx}px)`;el.style.opacity=1-Math.min(.45,Math.abs(dx)/innerWidth)},{passive:false});
+function endSwipe(){if(!live||axis!=='x'){live=false;return}live=false;const el=view(),dir=dx<0?1:-1,next=ORDER[ORDER.indexOf(cur)+dir],v=Math.abs(dx)/Math.max(1,Date.now()-t0),op=parseFloat(el.style.opacity)||1,x=dx;el.style.transform=el.style.opacity='';
+if(next&&(Math.abs(x)>innerWidth*.26||(v>.45&&Math.abs(x)>40)))go(next,{dir,fromX:x,fromO:op});else el.animate([{transform:`translateX(${x}px)`,opacity:op},{transform:'none',opacity:1}],{duration:380,easing:'cubic-bezier(.34,1.56,.64,1)'})}
+document.addEventListener('touchend',endSwipe);document.addEventListener('touchcancel',endSwipe);
+$('fab').onclick=()=>sheet('<h2>Quick actions</h2><div class="qa"><button class="btn" onclick="closeS();go(\'orders\')">New order</button><button class="btn" onclick="recv()">Receive stock</button><button class="btn" onclick="closeS();go(\'stock\');setTimeout(()=>$(\'sN\').focus(),450)">Add stock item</button><button class="btn" onclick="recipe()">Add dish &amp; recipe</button><button class="btn o" onclick="closeS()">Close</button></div>');
+function rRec(){$('recList').innerHTML=st.items.map((x,k)=>{const c=rcost(x),can=x.recipe.length?Math.floor(Math.min(...x.recipe.map(r=>sk(r.i)?sk(r.i).qty/r.q:1e9))+1e-9):0;return `<div class="rc" style="background:${COL[k%4]}"><div class="row"><h3 style="margin:0">${esc(x.name)}</h3><b style="font-size:20px">₹${x.price}</b></div><div style="opacity:.7;font-size:13px;margin:4px 0 8px">${x.recipe.length?`Cost ${inr(c)} · margin ${inr(x.price-c)} (${Math.round((x.price-c)/x.price*100)}%) · can make ${can} now`:'No ingredients yet'}</div>${x.recipe.map(r=>{const s=sk(r.i);return s?`<div class="lg"><span>${esc(s.name)}</span><span>${f(r.q)} ${s.unit}</span></div>`:''}).join('')}<div class="row" style="margin-top:14px;justify-content:flex-start;gap:10px"><button class="btn" style="margin:0" onclick="recipe(${x.id})">Edit recipe</button><button class="btn o" style="margin:0" onclick="delDish(${x.id})">Delete</button></div></div>`}).join('')||'<div class="empty">No dishes yet. Tap Add dish.</div>'}
+$('chips').onclick=e=>{const b=e.target.closest('button');if(b)go(b.dataset.v)};document.body.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g)go(g.dataset.go)});
+const low=()=>st.stock.filter(s=>s.qty<=s.min);
+function rDash(){const mx=Math.max(...SALES);$('bars').innerHTML=SALES.map((v,i)=>`<div class="col"><div class="bar ${v===mx?'max':''}" title="₹${v},000" style="height:${v/mx*100}%"></div>${MON[i]}</div>`).join('');
+const l=low();$('lowList').innerHTML=l.length?l.map(s=>`<div class="row" style="margin-bottom:6px"><b>${esc(s.name)}</b><span class="tag">${s.qty} ${s.unit}</span></div>`).join(''):'<p>Everything is well stocked.</p>';
+$('best').innerHTML=[...st.items].sort((a,b)=>b.sold-a.sold).slice(0,4).map((x,i)=>`<div class="blk" style="background:${COL[i]};color:#0c0c0c"><span class="rank">${i+1}</span>${x.photo?`<img src="${esc(x.photo)}" alt="" onerror="this.style.visibility='hidden'">`:''}<div><b>${esc(x.name)}</b><span class="mut" style="color:#0c0c0c;opacity:.7">${esc(x.cat)}</span></div><span class="tag">${x.sold} sold</span></div>`).join('');
+renderToday();$('duty').textContent=st.staff.filter(s=>s.active&&s.att==='Present').length+'/'+st.staff.length}
+function rStock(){const l=low();$('lowCount').textContent=l.length?l.length+' running low':'All stocked';$('lowCount').className='badge '+(l.length?'r':'');$('invVal').textContent='Stock value '+inr(st.stock.reduce((a,s)=>a+s.qty*s.cost,0));
+$('stockGrid').innerHTML=st.stock.map(s=>{const lo=s.qty<=s.min;return `<div class="item ${lo?'low':''}"><div class="row"><h3>${esc(s.name)}</h3>${lo?'<span class="tag">'+(s.qty<=0?'Out':'Low')+'</span>':''}</div><div class="qty">${f(s.qty)}<small>${s.unit}</small></div><div class="meter"><i style="width:${Math.min(100,s.qty/(s.min*3)*100)}%"></i></div><div class="mut" style="color:inherit;margin-bottom:12px">${inr(s.cost)}/${s.unit} · alert at ${s.min} · worth ${inr(s.qty*s.cost)}</div><div class="row"><button class="rnd" aria-label="Use one" onclick="adj(${s.id},-1)">−</button><button class="btn o" style="padding:9px 16px" onclick="recv(${s.id})">Receive</button><button class="rnd p" aria-label="Add one" onclick="adj(${s.id},1)">+</button></div><button class="btn o" style="width:100%;margin:10px 0 0;padding:9px 16px" onclick="delStock(${s.id})">Delete</button></div>`}).join('')}
+window.adj=(id,d)=>{const s=sk(id);if(d<0&&s.qty<=0)return;s.qty=Math.max(0,r3(s.qty+d));lg(s,'ADJUSTMENT',d,'Manual change');save();rStock()};
+$('sAdd').onclick=()=>{const n=$('sN').value.trim(),q=Number($('sQ').value);if(!n||$('sQ').value==='')return toast('Enter item and quantity');const s={id:nid++,name:n,qty:q,unit:$('sU').value,min:Number($('sM').value)||5,cost:Number($('sC').value)||0};st.stock.push(s);lg(s,'OPENING',q,'New stock item');save();['sN','sQ','sM','sC'].forEach(i=>$(i).value='');rStock();toast('Stock item added')};
+window.recv=id=>{const s=id&&sk(id);sheet(`<h2>Receive ${s?esc(s.name):'stock'}</h2>${s?'':`<label for="rI">Item</label><select id="rI">${st.stock.map(x=>`<option value="${x.id}">${esc(x.name)} (${x.unit})</option>`).join('')}</select>`}<label for="rQ">Quantity received${s?' ('+s.unit+')':''}</label><input id="rQ" type="number" step="any" min="0"><div class="row" style="margin-top:16px;justify-content:flex-start"><button class="btn" onclick="doRecv(${id||0})">Add to stock</button><button class="btn o" onclick="closeS()">Cancel</button></div>`);$('rQ').focus()};
+window.doRecv=id=>{const q=r3($('rQ').value);if(!(q>0))return toast('Enter quantity');const s=sk(id||$('rI').value);s.qty=r3(s.qty+q);lg(s,'STOCK IN',q,'Stock received');save();closeS();R[cur]();toast('Stock added')};
+const FL=['All','New','Accepted','Preparing','Ready','Completed'],NX={New:'Accepted',Accepted:'Preparing',Preparing:'Ready',Ready:'Completed'};
+function rOrders(){setTimeout(prevOrd);$('oI').innerHTML=st.items.map(x=>`<option value="${x.id}">${esc(x.name)} · ₹${x.price}</option>`).join('');$('filters').innerHTML=FL.map(f=>`<button class="${f===flt?'on':''}" data-f="${f}">${f}</button>`).join('');
+const o=st.orders.filter(x=>flt==='All'||x.status===flt);$('ordCount').textContent=st.orders.filter(x=>x.status!=='Completed').length+' open';
+$('orderList').innerHTML=o.map(x=>`<div class="act"><div class="row"><b>Order #${String(x.id).slice(-4)}</b><span class="badge ${x.status==='New'?'r':x.status==='Ready'?'':'w'}">${x.status}</span></div><p class="mut" style="margin:6px 0 10px">${x.table} · ${x.time} · ${x.lines.map(l=>l.qty+'× '+esc(l.name)).join(', ')}</p><div class="row"><b style="font-size:20px">₹${x.total}</b>${NX[x.status]?`<button class="btn l" onclick="adv(${x.id})">Mark ${NX[x.status]}</button>`:''}</div></div>`).join('')||'<div class="empty">No orders here yet. Add one above.</div>'}
+$('filters').onclick=e=>{const b=e.target.closest('[data-f]');if(b){flt=b.dataset.f;rOrders()}};
+$('oAdd').onclick=()=>{const it=st.items.find(i=>i.id==$('oI').value),q=Math.max(1,Number($('oQ').value)||1);if(!it)return toast('Add a menu item first');st.orders.unshift({id:Date.now(),lines:[{name:it.name,qty:q,id:it.id}],total:it.price*q,status:'New',table:$('oT').value,time:new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})});save();rOrders();toast('Order added')};
+function need(o){const m={};o.lines.forEach(l=>{const it=st.items.find(i=>i.id===l.id);(it?it.recipe:[]).forEach(r=>m[r.i]=(m[r.i]||0)+r.q*l.qty)});return m}
+function level(s){return s.qty<=0?2:s.qty<=s.min?1:0}
+function deduct(o){let cg=0;const w=[],m=need(o);Object.keys(m).forEach(k=>{const s=sk(k);if(!s)return;const n=r3(m[k]),take=Math.min(n,s.qty),b=level(s);s.qty=r3(s.qty-take);cg+=take*s.cost;lg(s,'ORDER USE',-take,'Order #'+String(o.id).slice(-4)+(take<n?' (short by '+f(n-take)+')':''));if(take<n)w.push(s.name+' ran out');else if(level(s)>b)w.push(s.name+(s.qty<=0?' is out':' is low'))});o.cogs=cg;return w}
+function prevOrd(){const it=st.items.find(i=>i.id==$('oI').value),q=Math.max(1,Number($('oQ').value)||1);if(!it||!it.recipe.length){$('oPrev').innerHTML='<p style="margin:10px 0 0">No recipe set for this dish, so stock will not change.</p>';return}
+$('oPrev').innerHTML='<p style="margin:12px 0 6px;font-weight:700">Accepting this order will use</p>'+it.recipe.map(r=>{const s=sk(r.i);if(!s)return'';const n=r.q*q;return `<div class="row" style="margin-bottom:4px;${n>s.qty?'color:#8a1a12;font-weight:700':''}"><span>${esc(s.name)}</span><span>${f(n)} ${s.unit} · have ${f(s.qty)}</span></div>`}).join('')}
+$('oI').onchange=prevOrd;$('oQ').oninput=prevOrd;
+window.adv=id=>{const o=st.orders.find(x=>x.id===id);o.status=NX[o.status];let w=[];if(o.status==='Accepted')w=deduct(o);if(o.status==='Completed'){o.done=Date.now();o.lines.forEach(l=>{const it=st.items.find(i=>i.id===l.id);if(it)it.sold+=l.qty})}save();rOrders();toast(w.length?'Accepted. Check stock: '+w.join(', '):'Order '+o.status.toLowerCase())};
+function renderToday(){const d=new Date().toDateString(),T=st.orders.filter(o=>o.status==='Completed'&&new Date(o.done).toDateString()===d),rev=T.reduce((a,o)=>a+o.total,0),cg=T.reduce((a,o)=>a+(o.cogs||0),0),r=(a,b)=>`<div class="row" style="margin-bottom:8px"><span>${a}</span><b>${b}</b></div>`;$('today').innerHTML='<h2>Today</h2>'+r('Completed orders',T.length)+r('Revenue',inr(rev))+r('Ingredients used',inr(cg))+r('Gross profit',inr(rev-cg))+netRow()}
+function rLog(){$('logList').innerHTML=st.log.slice(0,100).map(e=>`<div class="act"><div class="row"><div><b>${esc(e.name)}</b><div class="mut">${e.type} · ${esc(e.note||'')}<br>${new Date(e.t).toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}</div></div><div style="text-align:right"><b style="color:${e.d<0?'#b3261e':'#2f6b1f'}">${e.d>0?'+':''}${f(e.d)} ${e.unit}</b><div class="mut">Balance ${f(e.bal)}</div></div></div></div>`).join('')||'<div class="empty">No movements yet.</div>'}
+function rMenu(){$('menuGrid').innerHTML=st.items.map(x=>{const c=rcost(x);return `<div class="item">${x.photo?`<img src="${esc(x.photo)}" alt="${esc(x.name)}">`:''}<h3>${esc(x.name)}</h3><p>${esc(x.desc||'')}</p><div class="row"><b style="font-size:22px">₹${x.price}</b><span class="badge ${x.off?'r':''}">${x.off?'Sold out':'Available'}</span></div><div class="mut" style="margin-top:8px">${x.recipe.length?`Cost ${inr(c)} · margin ${inr(x.price-c)} (${Math.round((x.price-c)/x.price*100)}%)`:'No recipe yet'}</div><div class="row" style="margin-top:12px"><button class="btn" style="flex:1" onclick="recipe(${x.id})">Recipe</button><button class="btn o" style="flex:1" onclick="tog(${x.id})">${x.off?'Available':'Sold out'}</button></div><label class="btn o" for="pF" onclick="pickP(${x.id})" style="display:block;margin-top:10px">Change photo</label><button class="btn o" style="width:100%;margin:10px 0 0" onclick="delDish(${x.id})">Delete dish</button></div>`}).join('')}
+const shrinkP=f=>new Promise((res,rej)=>{const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const k=Math.min(1,700/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.8))};im.onerror=()=>{URL.revokeObjectURL(u);rej(new Error('bad'))};im.src=u});
+window.delDish=id=>{const x=st.items.find(i=>i.id===id);if(!x)return;if(!confirm('Delete '+x.name+'? This cannot be undone. Past orders stay as they are.'))return;st.items=st.items.filter(i=>i.id!==id);save();closeS();R[cur]();toast('Dish deleted')};
+window.delStaff=id=>{const x=st.staff.find(i=>i.id===id);if(!x)return;if(!confirm('Delete '+x.name+' from the team? This cannot be undone.'))return;st.staff=st.staff.filter(i=>i.id!==id);save();rTeam();toast('Team member deleted')};
+let pT=null;window.pickP=t=>{pT=t};
+$('pF').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;let d;try{d=await shrinkP(f)}catch(x){return toast('Could not open this photo. Try a JPG or PNG')}
+if(pT==='sheet'&&RD){if($('dN')){RD.name=$('dN').value;RD.price=$('dP').value;RD.r.forEach((r,k)=>{if($('ri'+k)){r.i=+$('ri'+k).value;r.q=+$('rq'+k).value||0}})}RD.photo=d;drawR();toast('Photo selected')}
+else if(pT==='form'){photo=d;$('iPv').src=d;$('iPv').style.display='block';toast('Photo selected')}
+else if(pT){const it=st.items.find(i=>i.id===pT);if(it){const old=it.photo;it.photo=d;if(save()){rMenu();toast('Photo changed')}else{it.photo=old;toast('Phone storage is full. Try a smaller photo')}}}};
+let RD=null;window.recipe=id=>{const it=id&&st.items.find(i=>i.id===id);RD={id,name:it?it.name:'',price:it?it.price:'',photo:it?it.photo||'':'',r:it?it.recipe.map(x=>({...x})):[]};drawR()};
+function drawR(){sheet(`<h2>${RD.id?'Edit':'Add'} dish</h2><label for="dN">Dish name</label><input id="dN" value="${esc(RD.name)}"><label for="dP">Selling price (₹)</label><input id="dP" type="number" min="0" value="${RD.price}"><p class="mut" style="margin:14px 0 4px">Dish photo</p>${RD.photo?`<img class="pv" src="${esc(RD.photo)}" alt="Dish photo">`:''}<label class="btn o" for="pF" onclick="pickP(\'sheet\')" style="margin:0 0 4px">${RD.photo?'Change photo':'Choose photo'}</label><p class="mut" style="margin:14px 0 6px">Ingredients used for 1 dish</p>${RD.r.map((r,k)=>`<div class="row" style="margin-bottom:8px"><select id="ri${k}" style="flex:2" aria-label="Ingredient">${st.stock.map(s=>`<option value="${s.id}" ${s.id==r.i?'selected':''}>${esc(s.name)} (${s.unit})</option>`).join('')}</select><input id="rq${k}" type="number" step="any" value="${r.q}" aria-label="Quantity"><button class="rnd" onclick="rmR(${k})" aria-label="Remove">✕</button></div>`).join('')}<button class="btn o" onclick="addR()">+ Ingredient</button><div class="row" style="margin-top:16px;justify-content:flex-start"><button class="btn" onclick="saveR()">Save dish</button><button class="btn o" onclick="closeS()">Cancel</button></div>${RD.id?`<button class="btn o" style="width:100%;margin:6px 0 0" onclick="delDish(${RD.id})">Delete dish</button>`:''}`)}
+function readR(){RD.name=$('dN').value;RD.price=$('dP').value;RD.r.forEach((r,k)=>{r.i=+$('ri'+k).value;r.q=+$('rq'+k).value||0})}
+window.addR=()=>{if(!st.stock.length)return toast('Add a stock item first');readR();RD.r.push({i:st.stock[0].id,q:0});drawR()};window.rmR=k=>{readR();RD.r.splice(k,1);drawR()};
+window.saveR=()=>{readR();const n=RD.name.trim(),p=Number(RD.price);if(!n||!(p>0))return toast('Enter dish name and price');const m={};RD.r.forEach(r=>{if(r.q>0)m[r.i]=r3((m[r.i]||0)+r.q)});const rec=Object.keys(m).map(k=>({i:+k,q:m[k]}));if(RD.id)Object.assign(st.items.find(i=>i.id===RD.id),{name:n,price:p,recipe:rec,photo:RD.photo||st.items.find(i=>i.id===RD.id).photo||''});else st.items.push({id:nid++,name:n,price:p,cat:'Food',desc:'',photo:RD.photo||U+'photo-1546549032-9571cd6b27df?w=500',sold:0,recipe:rec});const ok=save();closeS();R[cur]();toast(ok?'Dish saved':'Saved for now, but phone storage is full')};
+$('sheet').onclick=e=>{if(e.target.id==='sheet')closeS()};
+window.tog=id=>{const x=st.items.find(i=>i.id===id);x.off=!x.off;save();rMenu()};
+$('iAdd').onclick=()=>{const n=$('iN').value.trim(),p=Number($('iP').value);if(!n||p<=0)return toast('Enter name and price');st.items.push({id:nid++,name:n,price:p,cat:$('iC').value,desc:$('iD').value,photo:photo||U+'photo-1546549032-9571cd6b27df?w=500',sold:0,recipe:[]});const ok=save();['iN','iP','iD'].forEach(i=>$(i).value='');photo='';$('iPv').style.display='none';rMenu();toast(ok?'Dish added':'Added for now, but phone storage is full')};
+const norm=s=>String(s).toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'');
+function mergeMenu(list){let add=0,dup=0,bad=0;const seen=new Set(st.items.map(i=>norm(i.name))),CATS=['Food','Beverages','Desserts','Sides'];
+(list||[]).forEach(r=>{const n=String(r&&r.name||'').trim().replace(/\s+/g,' '),p=Math.round(Number(String(r&&r.price).replace(/[^0-9.]/g,'')));if(!n||!(p>0)){bad++;return}const k=norm(n);if(!k||seen.has(k)){dup++;return}seen.add(k);const c=CATS.find(x=>x.toLowerCase()===String(r.category||'').toLowerCase())||'Food';st.items.push({id:nid++,name:n,price:p,cat:c,desc:String(r.description||'').trim().slice(0,140),photo:'',sold:0,recipe:[]});add++});
+save();return{add,dup,bad}}
+const shrink=f=>new Promise((res,rej)=>{const im=new Image(),u=URL.createObjectURL(f);im.onload=()=>{const k=Math.min(1,1800/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.85).split(',')[1])};im.onerror=()=>{URL.revokeObjectURL(u);rej(new Error('Could not open one of the photos. Try a JPG or PNG.'))};im.src=u});
+$('mScan').onclick=async()=>{const all=[...$('mF').files],fs=all.slice(0,3),b=$('mScan'),o=$('mOut');if(!fs.length)return toast('Choose 1 to 3 photos first');if(!window.aiReadMenu)return toast('Still loading. Try again in a moment');
+b.disabled=true;b.textContent='Reading…';o.textContent='';
+try{const imgs=await Promise.all(fs.map(shrink)),list=await window.aiReadMenu(imgs),r=mergeMenu(list);rMenu();$('mF').value='';
+o.innerHTML='<b>'+r.add+' added</b>'+(r.dup?' · '+r.dup+' already on your menu, skipped':'')+(r.bad?' · '+r.bad+' skipped (no price found)':'')+(all.length>3?' · only the first 3 photos were used':'');toast(r.add+' dishes added')}
+catch(e){const m=String(e&&e.message||e);o.textContent=/permission|not enabled|has not been used|403|api key|disabled/i.test(m)?'Turn on AI Logic (Gemini Developer API) in the Firebase console, then try again.':/429|quota|exhaust|rate/i.test(m)?'Free limit reached. Wait a minute and try again.':'Could not read the menu. '+m.slice(0,160)}
+b.disabled=false;b.textContent='Read menu'};
+/* ---- refill stock from a bill photo ---- */
+const tok=x=>String(x).toLowerCase().replace(/&/g,'and').split(/[^a-z0-9]+/).filter(w=>w.length>1);
+const nu=u=>{u=String(u||'').toLowerCase().replace(/[^a-z]/g,'');return /^(kg|kgs|kilo|kilogram|kilograms)$/.test(u)?'kg':/^(l|lt|ltr|ltrs|liter|litre|liters|litres)$/.test(u)?'L':'pcs'};
+function matchStock(name){const k=norm(name),a=tok(name);if(!k)return null;let best=null,bs=0;st.stock.forEach(s=>{const n=norm(s.name),b=tok(s.name);let sc=0;if(n===k)sc=3;else if(n.length>=4&&k.length>=4&&(n.includes(k)||k.includes(n)))sc=2;else{const c=b.filter(w=>a.includes(w)).length;if(c)sc=c/Math.max(a.length,b.length)}if(sc>bs){bs=sc;best=s}});return bs>=.6?best:null}
+let BL=null;
+const bUnits=sel=>['kg','L','pcs'].map(u=>`<option ${u===sel?'selected':''}>${u}</option>`).join('');
+function drawBill(){const rows=BL.rows.map((r,i)=>{const m=r.match;return `<div style="background:#fff;border-radius:20px;padding:12px;margin-bottom:10px"><label style="display:flex;gap:10px;align-items:center;margin:0 0 8px;font-size:14px"><input type="checkbox" id="bk${i}" checked style="width:20px;height:20px;flex:none"><input id="bn${i}" value="${esc(r.name)}" aria-label="Item name" style="background:var(--bg)"></label>
+<select id="bm${i}" aria-label="Add to" onchange="bPick(${i})" style="background:var(--bg);margin-bottom:8px"><option value="new" ${m?'':'selected'}>＋ New stock item</option>${st.stock.map(x=>`<option value="${x.id}" ${m&&m.id===x.id?'selected':''}>${esc(x.name)} (${x.unit})</option>`).join('')}</select>
+<div class="row" style="gap:8px"><input id="bq${i}" type="number" step="any" min="0" value="${r.qty}" aria-label="Quantity" style="background:var(--bg)"><select id="bu${i}" aria-label="Unit" style="background:var(--bg);flex:.8" ${m?'disabled':''}>${bUnits(m?m.unit:r.unit)}</select><input id="bc${i}" type="number" step="any" min="0" value="${r.cost||''}" placeholder="₹/unit" aria-label="Price per unit" style="background:var(--bg)"></div></div>`}).join('');
+sheet(`<h2>Check the bill</h2><p class="mut" style="margin:0 0 4px">${BL.supplier?esc(BL.supplier)+' · ':''}${BL.date?esc(BL.date)+' · ':''}${BL.total?'Bill total '+inr(BL.total):BL.rows.length+' items'}</p>${BL.dup?'<p style="color:#8a1a12;font-weight:700;margin:6px 0">This bill looks like one you already added.</p>':''}<p class="mut" style="margin:6px 0 12px">Untick anything wrong. Quantity, unit and price per unit can be edited.</p>${rows}<div class="row" style="margin-top:6px;justify-content:flex-start"><button class="btn" onclick="bApply()">Add to stock</button><button class="btn o" onclick="closeS()">Cancel</button></div>`)}
+window.bPick=i=>{const v=$('bm'+i).value,u=$('bu'+i);if(v==='new'){u.disabled=false}else{u.value=sk(v).unit;u.disabled=true}};
+window.bApply=()=>{let n=0,nw=0;const note='Bill'+(BL.supplier?' · '+BL.supplier:'');BL.rows.forEach((r,i)=>{if(!$('bk'+i).checked)return;const q=r3($('bq'+i).value),c=Number($('bc'+i).value)||0,m=$('bm'+i).value;if(!(q>0))return;
+if(m==='new'){const nm=$('bn'+i).value.trim();if(!nm)return;const s={id:nid++,name:nm,qty:q,unit:$('bu'+i).value,min:Math.max(1,Math.round(q*.25)),cost:c};st.stock.push(s);lg(s,'STOCK IN',q,note+' (new item)');nw++}
+else{const s=sk(m);s.qty=r3(s.qty+q);if(c>0)s.cost=c;lg(s,'STOCK IN',q,note);n++}});
+if(!n&&!nw)return toast('Nothing selected');if(!st.bills)st.bills=[];st.bills.push(BL.fp);save();closeS();R[cur]();$('bOut').innerHTML='<b>'+n+' refilled</b>'+(nw?' · '+nw+' new items added':'');toast('Stock updated from bill')};
+$('bScan').onclick=async()=>{const all=[...$('bF').files],fs=all.slice(0,3),b=$('bScan'),o=$('bOut');if(!fs.length)return toast('Choose 1 to 3 photos first');if(!window.aiReadBill)return toast('Still loading. Try again in a moment');
+b.disabled=true;b.textContent='Reading…';o.textContent='';
+try{const imgs=await Promise.all(fs.map(shrink)),r=await window.aiReadBill(imgs),rows=(r.items||[]).map(x=>{const name=String(x&&x.name||'').trim().replace(/\s+/g,' '),qty=r3(Number(String(x&&x.quantity).replace(/[^0-9.]/g,''))),cost=Math.round(Number(String(x&&x.unit_price).replace(/[^0-9.]/g,''))*100)/100||0;return{name,qty,cost,unit:nu(x&&x.unit),match:matchStock(name)}}).filter(x=>x.name&&x.qty>0);
+if(!rows.length)o.textContent='No items found on the bill. Try a closer, clearer photo with the whole bill in view.';
+else{const total=Math.round(Number(r.total)||0),fp=[norm(r.supplier||''),norm(r.date||''),total,rows.length].join('|');BL={rows,supplier:String(r.supplier||'').trim(),date:String(r.date||'').trim(),total,fp,dup:(st.bills||[]).includes(fp)};$('bF').value='';drawBill()}}
+catch(e){const m=String(e&&e.message||e);o.textContent=/permission|not enabled|has not been used|403|api key|disabled/i.test(m)?'Turn on AI Logic (Gemini Developer API) in the Firebase console, then try again.':/429|quota|exhaust|rate/i.test(m)?'Free limit reached. Wait a minute and try again.':'Could not read the bill. '+m.slice(0,160)}
+b.disabled=false;b.textContent='Read bill'};
+function rTeam(){const a=st.staff.filter(s=>s.active);$('tT').textContent=a.length;$('tP').textContent=a.filter(s=>s.att==='Present').length;$('tO').textContent=a.filter(s=>s.att!=='Present').length;$('tPay').textContent=inr(a.reduce((x,s)=>x+(s.pay||0),0));const q=$('sSearch').value.toLowerCase();
+$('staffList').innerHTML=st.staff.filter(s=>(s.name+' '+s.title+' '+s.role).toLowerCase().includes(q)).map(s=>`<div class="person" style="${s.active?'':'opacity:.55'}"><span class="av" style="background:${COL[s.id%4]}">${esc(s.name[0])}</span><div class="grow"><b>${esc(s.name)}</b><div class="mut">${esc(s.title||s.role)} · ${esc(s.role)}</div><div class="mut">${esc(s.shift)}</div></div><div style="text-align:right;min-width:92px"><b style="font-size:17px">${s.pay?inr(s.pay):'Set pay'}</b><div class="mut">per month</div></div><select aria-label="Attendance" onchange="att(${s.id},this.value)">${['Present','Off','Leave'].map(o=>`<option ${s.att===o?'selected':''}>${o}</option>`).join('')}</select><button class="pill" onclick="edit(${s.id})">Edit</button><button class="pill" onclick="deact(${s.id})">${s.active?'Deactivate':'Reactivate'}</button><button class="pill" onclick="delStaff(${s.id})">Delete</button></div>`).join('')}
+const MN=['January','February','March','April','May','June','July','August','September','October','November','December'],mi=d=>{const x=new Date(d);return x.getFullYear()*12+x.getMonth()};let em=mi(Date.now());
+const expIn=(e,m)=>e.mi<=m&&(e.rec?(e.end==null||m<=e.end):e.mi===m);
+function mCalc(m){const T=st.orders.filter(o=>o.status==='Completed'&&o.done&&mi(o.done)===m),rev=T.reduce((a,o)=>a+o.total,0),cg=T.reduce((a,o)=>a+(o.cogs||0),0),sal=st.staff.filter(s=>s.active).reduce((a,s)=>a+(s.pay||0),0),ex=st.expenses.filter(e=>expIn(e,m)),oth=ex.reduce((a,e)=>a+e.amt,0);return{rev,cg,sal,oth,ex,net:rev-cg-sal-oth}}
+const money=n=>(n<0?'− ':'')+inr(Math.abs(n)),netCol=n=>n<0?'#b3261e':'#1e5a10';
+const netRow=()=>{const c=mCalc(mi(Date.now()));return `<div class="row" style="margin-top:12px;padding-top:12px;border-top:1.5px solid #0c0c0c33"><span>Net profit this month</span><b style="color:${netCol(c.net)}">${money(c.net)}</b></div><p class="mut" style="margin:8px 0 0;color:inherit;opacity:.7;font-size:12px">After ingredients, salaries and monthly expenses</p>`};
+function rExp(){const c=mCalc(em),row=(a,b)=>`<div class="row" style="margin-bottom:8px"><span>${a}</span><b>${b}</b></div>`;$('expMonth').textContent=MN[em%12]+' '+Math.floor(em/12);
+$('expSum').innerHTML='<h2>Profit for the month</h2>'+row('Revenue',inr(c.rev))+row('Ingredients used','− '+inr(c.cg))+row('Team salaries','− '+inr(c.sal))+row('Other expenses','− '+inr(c.oth))+`<div class="row" style="margin-top:12px;padding-top:12px;border-top:1.5px solid #0c0c0c33"><span style="font-weight:700">Net profit</span><b style="font-size:28px;color:${netCol(c.net)}">${money(c.net)}</b></div><p class="mut" style="margin:10px 0 0;color:inherit;opacity:.7;font-size:12px">Salaries use each active person's monthly pay from the Team page. Only ingredients used in completed orders are counted, so buying stock is not counted twice.</p>`;
+$('expList').innerHTML=c.ex.map(e=>`<div class="act"><div class="row"><div><b>${esc(e.name)}</b><div class="mut">${esc(e.cat||'Other')} · ${e.rec?'Every month':'This month only'}</div></div><b style="font-size:18px">${inr(e.amt)}</b></div><div class="row" style="margin-top:10px;justify-content:flex-start;gap:8px">${e.rec?`<button class="pill" onclick="stopExp(${e.id})">Stop from this month</button>`:''}<button class="pill" onclick="delExp(${e.id})">Delete</button></div></div>`).join('')||'<div class="empty">No expenses for this month yet.</div>'}
+$('xPrev').onclick=()=>{em--;rExp()};$('xNext').onclick=()=>{if(em<mi(Date.now())){em++;rExp()}};
+$('xAdd').onclick=()=>{const n=$('xN').value.trim(),a=Number($('xA').value);if(!n||!(a>0))return toast('Enter name and amount');st.expenses.push({id:nid++,name:n,amt:a,cat:$('xC').value,rec:$('xR').value==='m',mi:em});const ok=save();['xN','xA'].forEach(i=>$(i).value='');rExp();toast(ok?'Expense added':'Added for now, but phone storage is full')};
+window.delExp=id=>{const e=st.expenses.find(x=>x.id===id);if(!e)return;if(!confirm('Delete '+e.name+'?'+(e.rec?' It will be removed from every month.':'')))return;st.expenses=st.expenses.filter(x=>x.id!==id);save();rExp();toast('Expense deleted')};
+window.stopExp=id=>{const e=st.expenses.find(x=>x.id===id);if(!e)return;if(!confirm('Stop '+e.name+' from '+MN[em%12]+' onwards? Earlier months keep it.'))return;if(em-1<e.mi)st.expenses=st.expenses.filter(x=>x.id!==id);else e.end=em-1;save();rExp();toast('Expense stopped')};
+window.delStock=id=>{const s=sk(id);if(!s)return;const u=st.items.filter(i=>(i.recipe||[]).some(r=>r.i==id));if(!confirm('Delete '+s.name+' from stock?'+(u.length?'\n\nIt is used in: '+u.map(i=>i.name).join(', ')+'. It will be removed from those recipes.':'')+'\n\nThis cannot be undone.'))return;u.forEach(i=>{i.recipe=i.recipe.filter(r=>r.i!=id)});st.stock=st.stock.filter(x=>x.id!=id);save();rStock();toast('Stock item deleted')};
+$('sSearch').oninput=rTeam;window.att=(id,v)=>{st.staff.find(s=>s.id===id).att=v;save();rTeam()};
+window.deact=id=>{const s=st.staff.find(x=>x.id===id);if(!confirm((s.active?'Deactivate ':'Reactivate ')+s.name+"'s record?"))return;s.active=!s.active;save();rTeam()};
+function openM(t,s){$('mT').textContent=t;$('eN').value=s?s.name:'';$('eR').value=s?s.role:'Waiter';$('eT').value=s?s.title||'':'';$('eP').value=s&&s.pay?s.pay:'';$('eS').value=s?s.shift:'';$('modal').classList.add('on');$('eN').focus()}
+$('addStaff').onclick=()=>{editing=null;openM('Add employee')};window.edit=id=>{editing=id;openM('Edit employee',st.staff.find(s=>s.id===id))};
+$('eCancel').onclick=()=>$('modal').classList.remove('on');$('modal').onclick=e=>{if(e.target.id==='modal')$('modal').classList.remove('on')};
+$('eSave').onclick=()=>{const n=$('eN').value.trim();if(!n)return toast('Enter a name');const o={name:n,role:$('eR').value,title:$('eT').value.trim()||$('eR').value,pay:Math.max(0,Number($('eP').value)||0),shift:$('eS').value};if(editing)Object.assign(st.staff.find(s=>s.id===editing),o);else st.staff.push({id:nid++,att:'Present',active:true,...o});save();$('modal').classList.remove('on');rTeam();toast('Saved')};
+function brand(){const n=st.name||'Restaurant Pro';$('brandName').textContent=n;document.title=n+' | Owner'}
+$('brand').onclick=()=>{sheet('<h2>Restaurant name</h2><label for="bN">Shown at the top of the app</label><input id="bN" value="'+esc(st.name||'Restaurant Pro')+'" maxlength="40"><div class="row" style="margin-top:16px;justify-content:flex-start"><button class="btn" onclick="st.name=$(\'bN\').value.trim()||\'Restaurant Pro\';save();brand();closeS()">Save</button><button class="btn o" onclick="closeS()">Cancel</button></div>');$('bN').select()};
+brand();rDash();
+</script>
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+import{getFirestore,doc,collection,setDoc,updateDoc,onSnapshot,serverTimestamp}from"https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import{getAI,getGenerativeModel,GoogleAIBackend}from"https://www.gstatic.com/firebasejs/13.4.0/firebase-ai.js";
+const firebaseConfig={apiKey:"AIzaSyDUFN7I20JFpZBUBEK9gaftN44DQSD1JOQ",authDomain:"cafe-f51f5.firebaseapp.com",projectId:"cafe-f51f5",storageBucket:"cafe-f51f5.firebasestorage.app",messagingSenderId:"712866884490",appId:"1:712866884490:web:d2d02fb150c41f302cb673",measurementId:"G-83D09P3RG9"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const $=id=>document.getElementById(id),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const AC=['var(--lime)','var(--aqua)','var(--pink)','var(--sand)'];
+const MODELS=['gemini-3.8-flash','gemini-4-hydrogen'];
+const PROMPT=`These are photos of one restaurant or cafe menu card. Read every dish and drink. Return only JSON in this shape: {"items":[{"name":string,"price":number,"category":"Food"|"Beverages"|"Desserts"|"Sides","description":string}]}. Rules: price is a plain number in rupees with no currency symbol. If an item has several sizes or variants with different prices (like Half/Full or Small/Large), make one item per variant and put the variant in the name, like "Paneer Tikka (Half)". description is a short line from the card if one exists, otherwise an empty string. Do not invent items or prices. List an item once even if it appears twice. Ignore headings, phone numbers, addresses and offers.`;
+const parseItems=t=>{t=String(t).trim().replace(/^```(?:json)?/i,'').replace(/```$/,'').trim();const j=JSON.parse(t);return Array.isArray(j)?j:(j.items||[])};
+window.aiReadMenu=async imgs=>{const ai=getAI(app,{backend:new GoogleAIBackend()}),parts=imgs.map(d=>({inlineData:{data:d,mimeType:'image/jpeg'}}));let err;
+for(const m of MODELS){try{const model=getGenerativeModel(ai,{model:m,generationConfig:{responseMimeType:'application/json',temperature:0}});const r=await model.generateContent([PROMPT,...parts]);return parseItems(r.response.text())}catch(e){err=e;if(!/model|404|not found|unsupported/i.test(String(e&&e.message)))throw e}}
+throw err};
+const BILL=`This is a photo of a purchase bill or invoice from a supplier to a restaurant or cafe, for stock such as ingredients and packaging. Return only JSON in this shape: {"supplier":string,"date":string,"total":number,"items":[{"name":string,"quantity":number,"unit":"kg"|"L"|"pcs","unit_price":number}]}. Rules: list only goods that were bought. Skip tax, GST, discount, delivery, round-off, subtotal and total lines. Convert units so that unit is always kg, L or pcs: grams to kg, ml to L, and packets, boxes, dozens, bags or any counted unit to pcs (1 dozen = 12 pcs). quantity is a plain number in that unit. unit_price is the price in rupees for ONE of that unit (if only a line amount is printed, divide it by the quantity). total is the final bill amount, or 0 if not visible. date is the bill date as printed, or an empty string. Do not invent items, quantities or prices. List an item once. If a value is unreadable, leave the item out.`;
+window.aiReadBill=async imgs=>{const ai=getAI(app,{backend:new GoogleAIBackend()}),parts=imgs.map(d=>({inlineData:{data:d,mimeType:'image/jpeg'}}));let err;
+for(const m of MODELS){try{const model=getGenerativeModel(ai,{model:m,generationConfig:{responseMimeType:'application/json',temperature:0}});const r=await model.generateContent([BILL,...parts]);const t=String(r.response.text()).trim().replace(/^```(?:json)?/i,'').replace(/```$/,'').trim(),j=JSON.parse(t);return Array.isArray(j)?{items:j}:j}catch(e){err=e;if(!/model|404|not found|unsupported/i.test(String(e&&e.message)))throw e}}
+throw err};
+let user=null,own,isAdmin,cafes=[],unsubOwn=null,unsubAll=null,creating=false,q='';
+const MSG={wait:['One<br>moment…','Checking your account…'],pend:['Waiting for<br>approval.','Your account is ready. Access starts as soon as the provider switches it on. This page unlocks by itself, no need to refresh.'],off:['Service<br>paused.','Access is switched off for your cafe right now. Please contact the provider.']};
+function lock(k){document.body.classList.add('locked');const sign=k==='sign';$('gSign').hidden=!sign;$('gWait').hidden=sign;if(!sign){$('wT').innerHTML=MSG[k][0];$('wP').textContent=MSG[k][1];$('wWho').textContent=user&&user.email?'Signed in as '+user.email:''}}
+function unlock(){
+try{if(localStorage.getItem('restpro_uid')!==user.uid){localStorage.setItem('restpro_uid',user.uid);location.reload();return}}catch(e){}
+document.body.classList.remove('locked');$('admChip').hidden=!isAdmin;if(isAdmin)window.regView('admin',renderAdmin)}
+function evaluate(){
+if(!user){lock('sign');return}
+if(isAdmin===undefined){lock('wait');return}
+if(isAdmin){unlock();return}
+if(own===undefined){lock('wait');return}
+if(own&&own.enabled===true){unlock();return}
+lock(own&&own.approvedAt?'off':'pend')}
+function stop(){if(unsubOwn)unsubOwn();if(unsubAll)unsubAll();unsubOwn=unsubAll=null;own=isAdmin=undefined;cafes=[];creating=false;$('admChip').hidden=true}
+function start(){
+unsubOwn=onSnapshot(doc(db,'cafes',user.uid),s=>{
+if(s.exists()){own=s.data()}else{own=null;if(!creating&&!s.metadata.fromCache){creating=true;setDoc(doc(db,'cafes',user.uid),{email:user.email||'',name:user.displayName||'',enabled:false,createdAt:serverTimestamp()}).catch(()=>{})}}
+evaluate()},()=>{own=null;evaluate()});
+unsubAll=onSnapshot(collection(db,'cafes'),s=>{isAdmin=true;cafes=s.docs.map(d=>({id:d.id,...d.data()}));evaluate();if($('admin').classList.contains('on'))renderAdmin()},()=>{isAdmin=false;evaluate()})}
+const ms=c=>c.createdAt&&c.createdAt.toMillis?c.createdAt.toMillis():0,waiting=c=>!c.enabled&&!c.approvedAt;
+function renderAdmin(){
+const list=cafes.filter(c=>c.id!==(user&&user.uid)),t=q.toLowerCase();
+$('admCount').textContent=list.filter(waiting).length+' waiting · '+list.filter(c=>c.enabled).length+' active';
+const rows=list.filter(c=>((c.name||'')+' '+(c.email||'')).toLowerCase().includes(t)).sort((a,b)=>(waiting(a)?0:1)-(waiting(b)?0:1)||ms(b)-ms(a));
+$('admList').innerHTML=rows.map((c,i)=>{const nm=c.name||c.email||'Unnamed cafe',st=c.enabled?'Active':c.approvedAt?'Paused':'Waiting for approval',d=ms(c)?' · joined '+new Date(ms(c)).toLocaleDateString('en-IN',{day:'2-digit',month:'short'}):'';
+return '<div class="person"><span class="av" style="background:'+AC[i%4]+'">'+esc(nm[0].toUpperCase())+'</span><div class="grow"><b>'+esc(c.name||'Unnamed cafe')+'</b><div class="mut">'+esc(c.email||'')+'</div><div class="mut">'+st+d+'</div></div><button class="sw" role="switch" aria-checked="'+(!!c.enabled)+'" data-uid="'+esc(c.id)+'" aria-label="Allow '+esc(nm)+'"><i></i></button></div>'}).join('')||'<div class="empty">No cafes yet. They appear here after they sign in.</div>'}
+$('admList').onclick=async e=>{const b=e.target.closest('.sw');if(!b)return;const c=cafes.find(x=>x.id===b.dataset.uid);if(!c)return;const next=!c.enabled,nm=c.name||c.email;
+try{await updateDoc(doc(db,'cafes',c.id),next?{enabled:true,approvedAt:serverTimestamp(),updatedAt:serverTimestamp()}:{enabled:false,updatedAt:serverTimestamp()});toast(nm+(next?' is ON':' is OFF'))}catch(err){toast('Could not change. Check Firestore rules.')}};
+$('admSearch').oninput=e=>{q=e.target.value;renderAdmin()};
+const HINTS={'auth/unauthorized-domain':'Add this website to Firebase > Authentication > Settings > Authorized domains.','auth/operation-not-allowed':'Turn on Google in Firebase > Authentication > Sign-in method.','auth/popup-blocked':'Your browser blocked the sign-in popup. Allow popups and try again.'};
+$('gBtn').onclick=async()=>{$('gMsg').textContent='Opening Google…';try{const p=new GoogleAuthProvider();p.setCustomParameters({prompt:'select_account'});await signInWithPopup(auth,p)}catch(e){if(e.code==='auth/popup-closed-by-user'||e.code==='auth/cancelled-popup-request'){$('gMsg').textContent='';return}$('gMsg').textContent=(HINTS[e.code]||'Sign-in failed.')+' ('+(e.code||'error')+')'}};
+$('acct').onclick=$('wOut').onclick=()=>signOut(auth);
+onAuthStateChanged(auth,u=>{stop();user=u;if(!u){$('gMsg').textContent='';lock('sign');return}$('acct').title=u.email||'';lock('wait');start()});
+</script></body></html>
