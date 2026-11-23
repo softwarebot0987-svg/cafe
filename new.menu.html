@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Menu</title><meta name="description" content="See the menu and order from your phone. Follow your order live, then get your bill."><meta property="og:type" content="website"><meta property="og:site_name" content="Restaurant Pro"><meta property="og:title" content="Order from your table"><meta property="og:description" content="See the menu and order from your phone. Follow your order live, then get your bill."><meta property="og:image" content="https://softwarebot0987-svg.github.io/cafe/preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Restaurant Pro app with orders, stock and bills"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Order from your table"><meta name="twitter:description" content="See the menu and order from your phone. Follow your order live, then get your bill."><meta name="twitter:image" content="https://softwarebot0987-svg.github.io/cafe/preview.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--lime:#b4ee4c;--pink:#f3a39e;--aqua:#6fd0dc;--sand:#e6dcc3;--bg:#f1f1ef;--card:#fff;--ink:#0c0c0c;--mut:#6d6d68;--line:#dcdcd6;--f:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#121212;--card:#1d1d1c;--ink:#f4f4f0;--mut:#9a9a93;--line:#333}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 var(--f);padding-bottom:110px}
+button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer;border:0}:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.wrap{max-width:720px;margin:auto;padding:16px}
+h1{font-size:clamp(40px,11vw,64px);line-height:.92;letter-spacing:-.05em;font-weight:800;margin:6px 0 10px}h2{font-size:24px;letter-spacing:-.04em;font-weight:800;margin:0 0 10px}
+.pill{display:inline-block;border-radius:999px;padding:7px 14px;background:var(--lime);color:#0c0c0c;font-weight:700;font-size:13px}
+input,select,textarea{width:100%;padding:13px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink)}textarea{border-radius:22px;resize:none}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 0;position:sticky;top:0;z-index:5;background:var(--bg);scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none;border-radius:999px;padding:10px 18px;background:var(--card);border:1px solid var(--line);font-weight:600}.chips .on{background:#0c0c0c;color:#fff;border-color:#0c0c0c}
+.dish{display:flex;gap:14px;background:var(--card);border-radius:28px;padding:12px;margin-bottom:12px;align-items:center}
+.ph{width:92px;height:92px;border-radius:22px;object-fit:cover;flex:none;display:grid;place-items:center;font-size:34px;font-weight:800;color:#0c0c0c}
+.dish h3{margin:0;font-size:18px;letter-spacing:-.03em;line-height:1.1}.dish p{margin:3px 0 8px;color:var(--mut);font-size:13px}.grow{flex:1;min-width:0}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.btn{border-radius:999px;padding:11px 22px;background:#0c0c0c;color:#fff;font-weight:700}.btn.l{background:var(--lime);color:#0c0c0c}.btn.o{background:transparent;color:inherit;border:1.5px solid currentColor}.btn[disabled]{opacity:.5}
+.step{display:flex;align-items:center;gap:10px}.step button{width:36px;height:36px;border-radius:50%;background:#0c0c0c;color:#fff;font-size:20px;font-weight:700}.step b{min-width:20px;text-align:center}
+.sold{opacity:.55}.tag{border-radius:999px;background:var(--pink);color:#0c0c0c;padding:4px 12px;font-size:12px;font-weight:700}
+#bar{position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom,0px));max-width:688px;margin:auto;background:#0c0c0c;color:#fff;border-radius:999px;padding:8px 8px 8px 24px;display:none;align-items:center;justify-content:space-between;z-index:8}#bar.on{display:flex}
+#sheet{position:fixed;inset:0;background:#000a;display:none;align-items:flex-end;justify-content:center;z-index:20}#sheet.on{display:flex}
+.sh{background:var(--sand);color:#0c0c0c;border-radius:32px 32px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom,0px));width:min(720px,100%);max-height:92vh;overflow:auto;animation:up .35s cubic-bezier(.22,1,.36,1)}@keyframes up{from{transform:translateY(40px);opacity:0}}
+.sh label{display:block;font-size:12px;font-weight:700;margin:12px 0 5px}.sh input,.sh select,.sh textarea{background:#fff;border:0;color:#0c0c0c}
+.line{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #0c0c0c22}
+.done{text-align:center;padding:40px 10px}.done .ok{width:92px;height:92px;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-size:46px;margin:0 auto 18px;color:#0c0c0c}
+.msg{padding:34px;text-align:center;color:var(--mut);background:var(--card);border-radius:26px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+.steps{list-style:none;padding:0;margin:14px 0}.steps li{display:flex;align-items:center;gap:12px;padding:8px 0;opacity:.45;font-weight:600}.steps li.done,.steps li.cur{opacity:1}
+.steps i{width:32px;height:32px;border-radius:50%;background:#fff;display:grid;place-items:center;font-style:normal;font-weight:800}.steps .done i{background:#0c0c0c;color:#fff}.steps .cur i{background:var(--lime);animation:pulse 1.4s infinite}@keyframes pulse{0%{box-shadow:0 0 0 0 #b4ee4cb0}100%{box-shadow:0 0 0 14px #b4ee4c00}}
+.act{background:var(--lime);color:#0c0c0c;border-radius:24px;padding:14px 18px;margin-bottom:12px;width:100%;text-align:left;font-weight:600}.err{color:#a3231a;font-weight:700;font-size:13px;margin-top:8px;min-height:18px}
+.hi{background:#fff;border-radius:20px;padding:12px;margin-bottom:10px;width:100%;text-align:left;display:block}
+.act{display:flex;align-items:center;gap:14px;font-size:16px;border:0;box-shadow:0 6px 18px #b4ee4c66}.act small{font-weight:500;opacity:.8}
+.stat{display:flex;gap:14px;align-items:center;border-radius:24px;padding:16px;color:#0c0c0c;margin:8px 0 12px}.stat .em{font-size:40px}.stat b{font-size:22px;letter-spacing:-.03em}
+.bill{background:#fff;color:#0c0c0c;border-radius:20px;padding:18px;margin:14px 0;border:2px dashed #0c0c0c44;font-size:14px}.bill h3{margin:0;text-align:center;font-size:22px;letter-spacing:-.03em}.bill .mu{text-align:center;color:#555;margin:2px 0}.bill .c{margin-top:12px}
+.bill table{width:100%;border-collapse:collapse;margin:12px 0}.bill th{font-size:11px;text-transform:uppercase;color:#777;text-align:left;border-bottom:1.5px solid #0c0c0c}.bill td{padding:6px 0;border-bottom:1px dotted #bbb;vertical-align:top}.bill .r{text-align:right;white-space:nowrap;padding-left:8px}
+.bill .tot{display:flex;justify-content:space-between;align-items:center;font-size:20px;border-top:1.5px solid #0c0c0c;padding-top:8px}
+@media print{body{background:#fff;padding:0}.wrap,#bar{display:none}#sheet{position:static;background:none;display:block}.sh{box-shadow:none;max-height:none;border-radius:0;background:#fff;padding:0;animation:none}.noprint{display:none!important}.bill{border:0;margin:0}}
+</style></head><body>
+<div class="wrap"><div class="row"><span class="pill" id="tbl" hidden></span></div><h1 id="name">Menu</h1><div id="active"></div><button class="btn" id="myBtn" hidden style="width:100%;margin-bottom:12px;padding:14px">🧾 My orders &amp; bills</button>
+<input id="q" type="search" placeholder="Search dishes…" aria-label="Search dishes" hidden><div class="chips" id="chips" hidden></div><div id="list"><div class="msg">Loading menu…</div></div></div>
+<div id="bar"><span><b id="bN">0 items</b> · <b id="bT">₹0</b></span><button class="btn l" id="bGo">View order</button></div>
+<div id="sheet"><div class="sh" id="sh"></div></div>
+<!--
+ FIRESTORE RULES to allow this page (merge into your existing rules):
+ match /cafes/{uid}/public/menu { allow read: if true; allow write: if request.auth != null && request.auth.uid == uid; }
+ match /cafes/{uid}/inbox/{id} {
+   allow create: if request.resource.data.keys().hasOnly(['lines','total','table','name','phone','note','status','createdAt'])
+     && request.resource.data.status == 'new' && request.resource.data.lines is list
+     && request.resource.data.lines.size() > 0 && request.resource.data.lines.size() <= 40
+     && request.resource.data.total is number && request.resource.data.total < 100000
+     && request.resource.data.name.size() <= 80 && request.resource.data.phone.size() <= 80 && request.resource.data.note.size() <= 200;
+   allow read, update, delete: if request.auth != null && request.auth.uid == uid;
+ }
+-->
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import{getFirestore,doc,getDoc,collection,addDoc,onSnapshot,serverTimestamp}from"https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyDUFN7I20JFpZBUBEK9gaftN44DQSD1JOQ",authDomain:"cafe-f51f5.firebaseapp.com",projectId:"cafe-f51f5",storageBucket:"cafe-f51f5.firebasestorage.app",messagingSenderId:"712866884490",appId:"1:712866884490:web:d2d02fb150c41f302cb673",measurementId:"G-83D09P3RG9"};
+const DB=getFirestore(initializeApp(firebaseConfig));
+const $=id=>document.getElementById(id),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const P=new URLSearchParams(location.search),C=P.get('c'),T=parseInt(P.get('t'),10),TABLE=T>0?'Table '+String(T).padStart(2,'0'):'';
+const COL=['var(--lime)','var(--aqua)','var(--pink)','var(--sand)'],inr=n=>'₹'+Number(n).toLocaleString('en-IN');
+let M={name:'',items:[]},cart={},cat='All',sending=false;
+if(TABLE){$('tbl').hidden=false;$('tbl').textContent=TABLE}
+const lines=()=>M.items.filter(i=>cart[i.id]>0&&!i.off).map(i=>({id:i.id,name:i.name,qty:cart[i.id],price:i.price})),total=()=>lines().reduce((a,l)=>a+l.price*l.qty,0),count=()=>lines().reduce((a,l)=>a+l.qty,0);
+function msg(t){$('list').innerHTML='<div class="msg">'+t+'</div>'}
+async function load(){if(!C)return msg('This menu link is incomplete. Please scan the table QR code again.');
+try{const s=await getDoc(doc(DB,'cafes',C,'public','menu'));if(!s.exists())return msg('The menu is not available yet. Please ask the staff.');M=s.data();M.items=Array.isArray(M.items)?M.items:[];
+$('name').textContent=M.name||'Menu';document.title=(M.name||'Menu')+' | Order';draw()}catch(e){msg(/permission/i.test(String(e&&e.message))?'The menu is not open to customers yet. Please ask the staff.':'Could not load the menu. Check your internet and refresh.')}}
+function draw(){const cats=['All',...new Set(M.items.map(i=>i.cat||'Food'))];$('q').hidden=$('chips').hidden=!M.items.length;
+$('chips').innerHTML=cats.map(c=>`<button class="${c===cat?'on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
+const q=$('q').value.trim().toLowerCase(),L=M.items.filter(i=>(cat==='All'||(i.cat||'Food')===cat)&&(i.name+' '+(i.desc||'')).toLowerCase().includes(q));
+$('list').innerHTML=L.map((i,k)=>{const n=cart[i.id]||0;return `<div class="dish ${i.off?'sold':''}">${i.photo?`<img class="ph" src="${esc(i.photo)}" alt="" loading="lazy" onerror="this.outerHTML='<div class=ph style=background:${COL[k%4]}>${esc(i.name[0]||'')}</div>'">`:`<div class="ph" style="background:${COL[k%4]}">${esc(i.name[0]||'')}</div>`}<div class="grow"><h3>${esc(i.name)}</h3>${i.desc?`<p>${esc(i.desc)}</p>`:'<p></p>'}<div class="row"><b style="font-size:19px">${inr(i.price)}</b>${i.off?'<span class="tag">Sold out</span>':n?`<div class="step"><button data-m="${i.id}" aria-label="Remove one">−</button><b>${n}</b><button data-p="${i.id}" aria-label="Add one">+</button></div>`:`<button class="btn l" data-p="${i.id}">Add</button>`}</div></div></div>`}).join('')||'<div class="msg">No dishes found.</div>';
+drawActive();const c=count(),a=activeO(),sh=$('sheet').classList.contains('on');$('bar').classList.toggle('on',(c>0||!!a)&&!sh);if(c>0){$('bN').textContent=c+(c===1?' item':' items');$('bT').textContent=inr(total());$('bGo').textContent='View order'}else if(a){$('bN').textContent='Your order';$('bT').textContent=INFO[a.lv].t;$('bGo').textContent='Track my order'}}
+$('chips').onclick=e=>{const b=e.target.closest('[data-c]');if(b){cat=b.dataset.c;draw()}};$('q').oninput=draw;
+$('list').onclick=e=>{const p=e.target.closest('[data-p]'),m=e.target.closest('[data-m]');if(p)cart[p.dataset.p]=Math.min(99,(cart[p.dataset.p]||0)+1);else if(m)cart[m.dataset.m]=Math.max(0,(cart[m.dataset.m]||0)-1);else return;draw()};
+function open(h){$('sh').dataset.t='';$('sh').innerHTML=h;$('sheet').classList.add('on');$('bar').classList.remove('on')}
+function close(){$('sheet').classList.remove('on');draw()}$('sheet').onclick=e=>{if(e.target.id==='sheet')close()};
+function cartView(){const L=lines();if(!L.length)return close();
+open(`<h2>Your order</h2>${L.map(l=>`<div class="line"><span><b>${esc(l.name)}</b><br>${inr(l.price)} each</span><div class="step"><button data-m="${l.id}" aria-label="Remove one">−</button><b>${l.qty}</b><button data-p="${l.id}" aria-label="Add one">+</button></div></div>`).join('')}
+<div class="row" style="margin:14px 0 4px"><b>Total</b><b style="font-size:26px">${inr(total())}</b></div>
+${TABLE?'':`<label for="oT">Table</label><select id="oT"><option>Takeaway</option>${Array.from({length:20},(_,i)=>`<option>Table ${String(i+1).padStart(2,'0')}</option>`).join('')}</select>`}
+<label for="oN">Your name *</label><input id="oN" maxlength="60" autocomplete="name" value="${esc(CU.n||'')}"><label for="oP">Phone number *</label><input id="oP" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" value="${esc(CU.p||'')}"><label for="oNote">Note for the kitchen (optional)</label><textarea id="oNote" rows="2" maxlength="150" placeholder="Less spicy, no onion…"></textarea>
+<div class="err" id="oErr" role="alert"></div><div class="row" style="margin-top:8px;justify-content:flex-start"><button class="btn" id="oSend">Place order</button><button class="btn o" id="oBack">Back to menu</button></div>`);
+$('oBack').onclick=close;$('oSend').onclick=send}
+$('bGo').onclick=()=>{if(count()>0)cartView();else{const a=activeO();if(a)trackView(a.id)}};
+$('sh').onclick=e=>{const p=e.target.closest('[data-p]'),m=e.target.closest('[data-m]');if(!p&&!m)return;if(p)cart[p.dataset.p]=Math.min(99,(cart[p.dataset.p]||0)+1);else cart[m.dataset.m]=Math.max(0,(cart[m.dataset.m]||0)-1);cartView()};
+let CU={};try{CU=JSON.parse(localStorage.getItem('cafe_cust')||'{}')}catch(e){}
+const K='cafe_orders_'+C,ST=['Sent','Accepted','Preparing','Ready','Completed'],MS=['Waiting for the restaurant to accept your order…','Your order is accepted.','Your food is being prepared.','Your order is ready! Please collect it or wait to be served.','Completed. Thank you, enjoy!'];
+let OR=[],subs={},curT=null;try{OR=JSON.parse(localStorage.getItem(K)||'[]')}catch(e){}
+const saveO=()=>{try{localStorage.setItem(K,JSON.stringify(OR.slice(0,30)))}catch(e){}},lvl=s=>Math.max(0,ST.indexOf(s==='New'?'Sent':s)),fmt=t=>new Date(t).toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'});
+const INFO=[{e:'📨',t:'Order sent',m:'We received your order. Waiting for the restaurant to accept it.',n:'The restaurant accepts your order.',c:'var(--sand)'},{e:'✅',t:'Order accepted',m:'The restaurant has accepted your order.',n:'The kitchen starts cooking your food.',c:'var(--aqua)'},{e:'🍳',t:'Being prepared',m:'The kitchen is cooking your food right now.',n:'Your food will be ready soon.',c:'var(--aqua)'},{e:'🔔',t:'Ready!',m:'Your food is ready. Please collect it, or it will be served to your table.',n:'Enjoy your meal. Your bill will show here.',c:'var(--lime)'},{e:'🧾',t:'Order completed',m:'Thank you! Your bill is below.',n:'',c:'var(--lime)'}],SL=['Order sent','Accepted','Being prepared','Ready','Completed'];
+const tm=t=>new Date(t).toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}),activeO=()=>OR.find(o=>o.lv<4&&Date.now()-o.at<864e5);
+function watch(o){if(subs[o.id]||o.lv>=4)return;subs[o.id]=onSnapshot(doc(DB,'cafes',C,'status',o.id),s=>{if(!s.exists())return;const d=s.data(),l=lvl(d.status),ts=d.updatedAt&&d.updatedAt.toMillis?d.updatedAt.toMillis():Date.now();let ch=false;
+if(Array.isArray(d.lines)&&d.lines.length){o.lines=d.lines.map(x=>({name:String(x.name),qty:+x.qty||1,price:+x.price||0}));ch=true}if(typeof d.total==='number'&&d.total!==o.total){o.total=d.total;ch=true}if(d.table&&d.table!==o.tb){o.tb=String(d.table);ch=true}
+if(l!==o.lv){const up=l>o.lv;o.lv=l;o.t=o.t||{};o.t[l]=o.t[l]||ts;ch=true;if(up&&navigator.vibrate)navigator.vibrate(l===3?[200,100,200]:60)}
+if(ch){saveO();if(l>=4&&subs[o.id]){subs[o.id]();delete subs[o.id]}refresh()}},()=>{})}
+function refresh(){const t=$('sh').dataset.t;draw();if($('sheet').classList.contains('on')){if(t==='track'&&curT)trackView(curT);else if(t==='hist')histView()}}
+function drawActive(){$('myBtn').hidden=!OR.length;const a=activeO();$('active').innerHTML=a?`<button class="act" data-t="${a.id}"><span style="font-size:30px">${INFO[a.lv].e}</span><span><b>${INFO[a.lv].t}</b><br><small>Tap here to see what is happening with your order</small></span></button>`:''}
+$('active').onclick=e=>{const b=e.target.closest('[data-t]');if(b)trackView(b.dataset.t)};
+function billHTML(o){const rows=o.lines.map(l=>`<tr><td>${esc(l.name)}</td><td class="r">${l.qty}</td><td class="r">${l.price?inr(l.price):''}</td><td class="r">${l.price?inr(l.price*l.qty):''}</td></tr>`).join('');
+return `<div id="bill" class="bill"><h3>${esc(M.name||'Restaurant')}</h3><div class="mu">Bill / Receipt</div><div class="mu">Order #${esc(o.id.slice(0,6).toUpperCase())}<br>${fmt(o.at)}${o.tb?' · '+esc(o.tb):''}</div>${o.n?`<div class="mu">${esc(o.n)}${o.p?' · '+esc(o.p):''}</div>`:''}<table><thead><tr><th>Item</th><th class="r">Qty</th><th class="r">Price</th><th class="r">Amount</th></tr></thead><tbody>${rows}</tbody></table><div class="tot"><span>Total</span><b>${inr(o.total)}</b></div><div class="mu c">Thank you! Please visit again.</div></div>`}
+function trackView(id){const o=OR.find(x=>x.id===id);if(!o)return;curT=id;const done=o.lv>=4,n=o.lines.reduce((a,l)=>a+l.qty,0),I=INFO[o.lv],T=o.t||{};
+open(`<div class="noprint"><div class="stat" style="background:${I.c}"><div class="em">${I.e}</div><div><b>${I.t}</b><br>${I.m}</div></div><p style="margin:0">Order #${esc(o.id.slice(0,6).toUpperCase())} · ${fmt(o.at)} · ${n} item${n>1?'s':''} · ${inr(o.total)}</p><ol class="steps">${SL.map((s,i)=>`<li class="${done||i<o.lv?'done':i===o.lv?'cur':''}"><i>${done||i<o.lv?'✓':i+1}</i><span>${s}${i===0?' · '+tm(o.at):T[i]?' · '+tm(T[i]):''}</span></li>`).join('')}</ol>${done?'':`<p style="margin:0 0 6px"><b>Next:</b> ${I.n}</p><p style="opacity:.7;font-size:13px;margin:0 0 14px">This page updates by itself. You can close it and come back anytime.</p>`}</div>${done?billHTML(o):''}<div class="row noprint" style="justify-content:flex-start;flex-wrap:wrap">${done?'<button class="btn" id="tPrint">Print / Save bill</button>':''}<button class="btn ${done?'o':''}" id="tMore">Order more</button><button class="btn o" id="tHist">My orders &amp; bills</button></div>`);
+$('sh').dataset.t='track';$('tMore').onclick=close;$('tHist').onclick=histView;if(done)$('tPrint').onclick=()=>print()}
+function histView(){open(`<h2>My orders &amp; bills</h2>${OR.map(o=>`<button class="hi" data-t="${o.id}"><div class="row"><b>${fmt(o.at)}</b><span class="tag" style="background:${o.lv>=4?'var(--lime)':'var(--pink)'}">${INFO[o.lv].t}</span></div><div style="font-size:13px;margin:3px 0;color:#555">${o.lines.map(l=>l.qty+'× '+esc(l.name)).join(', ')}</div><div class="row"><b>${inr(o.total)}</b><span style="font-size:13px;font-weight:700">${o.lv>=4?'View bill ›':'Track ›'}</span></div></button>`).join('')||'<p>No orders yet.</p>'}<button class="btn o" id="hClose">Close</button>`);$('sh').dataset.t='hist';$('hClose').onclick=close;document.querySelectorAll('#sh .hi').forEach(b=>b.onclick=()=>trackView(b.dataset.t))}
+$('myBtn').onclick=histView;
+async function send(){if(sending)return;const L=lines();if(!L.length)return;const v=id=>($(id)?$(id).value:'').trim(),err=(t,id)=>{$('oErr').textContent=t;$(id).focus()};
+const nm=v('oN').replace(/\s+/g,' '),ph=v('oP').replace(/\D/g,'');
+if(nm.length<2)return err('Please enter your name.','oN');if(ph.length<10||ph.length>13)return err('Please enter a valid 10-digit phone number.','oP');
+sending=true;$('oErr').textContent='';const b=$('oSend');b.disabled=true;b.textContent='Sending…';
+try{const t=total(),r=await addDoc(collection(DB,'cafes',C,'inbox'),{lines:L,total:t,table:TABLE||v('oT')||'Takeaway',name:nm,phone:ph,note:v('oNote'),status:'new',createdAt:serverTimestamp()});
+CU={n:nm,p:ph};try{localStorage.setItem('cafe_cust',JSON.stringify(CU))}catch(e){}
+const o={id:r.id,at:Date.now(),total:t,lines:L.map(l=>({name:l.name,qty:l.qty,price:l.price})),lv:0,n:nm,p:ph,tb:TABLE||v('oT')||'Takeaway',t:{}};OR.unshift(o);saveO();cart={};watch(o);trackView(o.id)}
+catch(e){b.disabled=false;b.textContent='Place order';$('oErr').textContent=/permission/i.test(String(e&&e.message))?'Orders are not switched on yet. Please call the staff.':'Could not send the order. Check your internet and try again.'}sending=false}
+OR.forEach(watch);drawActive();
+load();
+</script></body></html>
